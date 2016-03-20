@@ -83,3 +83,21 @@ Content-Length: 81
   "uid": 2
 }
 ```
+
+```
+$ ./fill_db.py
+$ curl -i 'http://127.0.0.1:8080/get?uid=999&date=2016-03-20'
+HTTP/1.1 200 OK
+Server: gunicorn/19.4.5
+Date: Sun, 20 Mar 2016 18:36:19 GMT
+Connection: close
+Content-Type: application/json
+Content-Length: 87
+
+{
+  "count": 80000, 
+  "execution_time": "0.03375s", 
+  "status": "OK", 
+  "uid": 999
+}
+```

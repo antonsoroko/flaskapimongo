@@ -15,4 +15,3 @@
 - name: Ensure mongodb is started
   sudo: yes
   service: name=mongodb state=started enabled=yes
-  changed_when: False

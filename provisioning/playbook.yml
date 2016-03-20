@@ -11,3 +11,4 @@
     - role: flaskapimongo
       app_path: /opt/flaskapimongo
       requirements_file: requirements.txt
+      git_repo: https://github.com/antonsoroko/flaskapimongo.git

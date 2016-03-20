@@ -27,7 +27,7 @@
 #want to have three levels of directories with similar names (first - with venv and repo;
 #second (repo) - with app code dir and configs/scripts, third - with app code).
 - name: Checkout application
-  git: repo=https://github.com/antonsoroko/flaskapimongo.git dest={{ app_path }}
+  git: repo={{ git_repo }} dest={{ app_path }}
   register: repo_changed
 
 - name: Create folder for virtualenv

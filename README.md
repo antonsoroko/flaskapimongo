@@ -7,6 +7,14 @@ Start with:
 vagrant up
 ```
 
+Ansible playbook will be applied automatically by vagrant provisioning at the first boot.
+
+Then you can re-run it by:
+
+```
+$ vagrant provision
+```
+
 Application will be available at [http://localhost:8080/](http://localhost:8080/)
 
 POST url is /post, GET url is /get.

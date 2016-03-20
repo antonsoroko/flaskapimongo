@@ -62,5 +62,5 @@ target/
 .ipynb_checkpoints
 
 #Custom
-.venv
-.vagrant
+venv/
+.vagrant/

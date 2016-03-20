@@ -7,17 +7,20 @@ Start with:
 vagrant up
 ```
 
+Application will be available at [http://localhost:8080/](http://localhost:8080/)
+
+POST url is /post, GET url is /get.
+
 Ansible playbook will be applied automatically by vagrant provisioning at the first boot.
 
-Then you can re-run it by:
+Then you can re-run it (after commiting some changes for example) by:
 
 ```
 $ vagrant provision
 ```
 
-Application will be available at [http://localhost:8080/](http://localhost:8080/)
+Application will be updated and restarted.
 
-POST url is /post, GET url is /get.
 
 You can run unit test by doing following (if you have mongodb installed on localhost - you can do it in repo dir, otherwise inside vagrant VM in /opt/flaskapimongo/ dir):
 

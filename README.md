@@ -104,3 +104,7 @@ Content-Length: 87
   "uid": 999
 }
 ```
+
+#### License
+
+Licensed under the GPLv3 License. See the LICENSE file for details.

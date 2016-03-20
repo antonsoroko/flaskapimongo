@@ -1,0 +1,62 @@
+- name: Install needed packages
+  apt: pkg={{ item }} state=present update_cache=true
+  with_items:
+    - build-essential
+    - python-dev
+    - python-pip
+    - git
+  sudo: yes
+
+- name: Install virtualenv
+  apt: pkg=python-virtualenv state=present update_cache=true
+  sudo: yes
+
+- name: Set virtualenv_path and requirements_file_path
+  set_fact:
+    virtualenv_path: "{{ app_path }}/venv"
+    requirements_file_path: "{{ app_path }}/{{requirements_file}}"
+
+- name: Create folder for application
+  file: state=directory owner={{ user }} group={{ group }} path={{ app_path }}
+  sudo: yes
+
+#I want to store venv in application directory, which contains the code dir and
+#some configs and scripts. But if directory is not empty
+#git will not clone repo. So I have to clone first and then make venv.
+#Because of this I use deferred notify. It is not very elegant, but I really do not
+#want to have three levels of directories with similar names (first - with venv and repo;
+#second (repo) - with app code dir and configs/scripts, third - with app code).
+- name: Checkout application
+  git: repo=https://github.com/antonsoroko/flaskapimongo.git dest={{ app_path }}
+  register: repo_changed
+
+- name: Create folder for virtualenv
+  file: state=directory owner={{ user }} group={{ group }} path={{ virtualenv_path }}
+  sudo: yes
+
+- name: Check whether virtualenv exists
+  stat: path="{{ virtualenv_path }}/bin/activate"
+  register: virtualenv_activate
+
+- name: Create the virtualenv
+  command: virtualenv "{{ virtualenv_path }}"
+  when: virtualenv_activate.stat.exists != true
+
+- name: Install requirements
+  pip: requirements={{ requirements_file_path }} virtualenv={{ virtualenv_path }}
+  when: requirements_file is defined
+
+- name: Install upstart script
+  template: src=upstart-flaskapimongo.conf.j2 dest=/etc/init/flaskapimongo.conf
+  sudo: yes
+
+#deferred notify
+- name: Need to restart
+  command: echo
+  when: repo_changed | changed
+  notify:
+    - restart flaskapimongo
+
+- name: Start flaskapimongo service
+  service: name=flaskapimongo state=started enabled=true
+  sudo: yes

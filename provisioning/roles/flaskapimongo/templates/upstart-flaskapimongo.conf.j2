@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+
+description "flaskapimongo"
+
+start on started mongodb
+stop on runlevel [016]
+
+respawn
+setuid nobody
+setgid nogroup
+chdir {{ app_path }}
+
+exec {{ virtualenv_path }}/bin/gunicorn flaskapimongo:app --config {{ app_path }}/gunicorn.conf.py

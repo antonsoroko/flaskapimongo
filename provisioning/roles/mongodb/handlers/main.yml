@@ -1,0 +1,4 @@
+---
+- name: mongodb restart
+  sudo: yes
+  service: name=mongodb state=restarted

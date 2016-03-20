@@ -1,0 +1,20 @@
+---
+- name: Replace sources.list
+  sudo: yes
+  copy: src=sources.list dest=/etc/apt/sources.list
+
+- name: Replace /etc/inputrc
+  sudo: yes
+  copy: src=inputrc dest=/etc/inputrc
+
+- name: Install common packages
+  sudo: yes
+  apt: pkg={{ item }} state=latest update_cache=yes
+  with_items:
+    - htop
+    - mc
+    - iotop
+    - dstat
+    - iftop
+    - bash-completion
+    - command-not-found

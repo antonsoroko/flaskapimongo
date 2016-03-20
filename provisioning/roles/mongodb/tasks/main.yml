@@ -1,0 +1,18 @@
+---
+- name: Install mongodb
+  sudo: yes
+  apt: pkg=mongodb state=latest update_cache=yes
+
+- name: Configure mongodb journal size
+  sudo: yes
+  lineinfile:
+    state: present
+    dest: /etc/mongodb.conf
+    regexp: '^#* *smallfiles ?\='
+    line: "smallfiles=true"
+  notify: mongodb restart
+
+- name: Ensure mongodb is started
+  sudo: yes
+  service: name=mongodb state=started enabled=yes
+  changed_when: False

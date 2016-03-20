@@ -1,0 +1,13 @@
+---
+- hosts: all
+  user: vagrant
+  sudo: no
+  vars:
+    user: vagrant
+    group: vagrant
+  roles:
+    - role: common
+    - role: mongodb
+    - role: flaskapimongo
+      app_path: /opt/flaskapimongo
+      requirements_file: requirements.txt

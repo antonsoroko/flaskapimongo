@@ -1,6 +1,6 @@
 # flaskapimongo
 
-The test task - json api application based on flash and mongodb.
+The test task - json api application based on flash and mongodb. See task description  [here](DESCRIPTION.md).
 
 Start with:
 ```
@@ -107,4 +107,4 @@ Content-Length: 87
 
 #### License
 
-Licensed under the GPLv3 License. See the LICENSE file for details.
+Licensed under the GPLv3 License. See the [LICENSE](LICENSE) file for details.

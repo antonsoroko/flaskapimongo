@@ -1,6 +1,6 @@
 # flaskapimongo
 
-The test task - json api application based on flash and mongodb. See task description  [here](DESCRIPTION.md).
+The test task - JSON API application based on flask and mongodb. See task description  [here](DESCRIPTION.md).
 
 Start with:
 ```
